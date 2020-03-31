@@ -1,0 +1,60 @@
+﻿@model IEnumerable<istp_laba1.Classrooms>
+
+@{
+    ViewData["Title"] = "Classrooms";
+}
+
+<h1>Classrooms</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+               
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        $.get('api/Charts/JsonData1', function (jsonData1) {
+            data = google.visualization.arrayToDataTable(jsonData1, false);
+            var option = {
+                'title': "Lessons by classrooms",
+                'width': 500,
+                'height': 500
+            };
+            chart = new google.visualization.PieChart(document.getElementById('chart2'));
+            chart.draw(data, option);
+        })
+    }
+    </script>
+}
+
+<div id="chart2"></div>
