@@ -1,0 +1,41 @@
+﻿@model istp_laba1.StudentAbonements
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create new</h1>
+
+<h4>Student's abonement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StudId" class="control-label"></label>
+                <select asp-for="StudId" class ="form-control" asp-items="ViewBag.StudId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbonId" class="control-label"></label>
+                <select asp-for="AbonId" class ="form-control" asp-items="ViewBag.AbonId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivationDate" class="control-label"></label>
+                <input asp-for="ActivationDate" class="form-control" />
+                <span asp-validation-for="ActivationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
